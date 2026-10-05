@@ -1,0 +1,29 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+
+# tooling
+.ruff_cache/
+.pytest_cache/
+uv.lock
+
+# run outputs, weights and data (root-level dirs only; src/iris3b/data is code)
+/output/
+/exported/
+/checkpoints/
+/data/
+wandb/
+*.pth
+*.pt
+*.safetensors
+*.tar
+wids-meta.json
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,218 @@
+[
+ {
+  "image": "examples/46.webp",
+  "prompt": "Macro photograph of a jumping spider with huge glossy eyes, iridescent hairs, perched on a green leaf, extreme detail",
+  "size": "1024×1024",
+  "seed": 46001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "macro"
+ },
+ {
+  "image": "examples/151.webp",
+  "prompt": "A vintage travel poster that reads \"VISIT THE MOON\" with a retro rocket and lunar landscape, bold 1950s typography",
+  "size": "832×1280",
+  "seed": 151003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "typography"
+ },
+ {
+  "image": "examples/21.webp",
+  "prompt": "Close-up portrait of a young woman with silver glitter freckles and iridescent makeup, soft pastel background, high fashion beauty photography",
+  "size": "896×1152",
+  "seed": 21003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "portrait"
+ },
+ {
+  "image": "examples/1.webp",
+  "prompt": "A winding road through the Dolomites in autumn, golden larch trees, jagged limestone peaks glowing in alpenglow, aerial drone photograph",
+  "size": "1280×832",
+  "seed": 1001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "landscape"
+ },
+ {
+  "image": "examples/100.webp",
+  "prompt": "A whimsical children's book illustration of a fox and a rabbit having a picnic under a giant mushroom, soft colored pencil textures",
+  "size": "1152×896",
+  "seed": 100002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "illustration"
+ },
+ {
+  "image": "examples/70.webp",
+  "prompt": "A luxury perfume bottle made of faceted glass sitting on wet black stone, water droplets, dramatic rim light, commercial product photography",
+  "size": "896×1152",
+  "seed": 70003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "product"
+ },
+ {
+  "image": "examples/129.webp",
+  "prompt": "A voxel art scene of a floating island with a waterfall, a small castle and trees, bright colors, isometric view",
+  "size": "1024×1024",
+  "seed": 129001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "3d"
+ },
+ {
+  "image": "examples/57.webp",
+  "prompt": "A curious red panda peeking out from a tree branch covered in moss, soft forest background, adorable wildlife photograph",
+  "size": "896×1152",
+  "seed": 57003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "wildlife"
+ },
+ {
+  "image": "examples/160.webp",
+  "prompt": "A coffee shop menu board with the words \"Espresso\", \"Latte\" and \"Cappuccino\" in chalk lettering with prices and doodles",
+  "size": "1152×896",
+  "seed": 160002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "typography"
+ },
+ {
+  "image": "examples/79.webp",
+  "prompt": "A post-impressionist painting of a starry night over a sleepy harbor town, swirling skies, thick impasto brushstrokes, vivid blues and yellows",
+  "size": "1280×832",
+  "seed": 79003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "painting"
+ },
+ {
+  "image": "examples/1035.webp",
+  "prompt": "Editorial fashion photograph of a model in a voluminous red tulle gown on a foggy beach, wind blowing the fabric",
+  "size": "832×1280",
+  "seed": 1035002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "fashion"
+ },
+ {
+  "image": "examples/47.webp",
+  "prompt": "Close-up of soap bubble surface with swirling rainbow interference patterns, black background, abstract macro photograph",
+  "size": "1024×1024",
+  "seed": 47002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "macro"
+ },
+ {
+  "image": "examples/10.webp",
+  "prompt": "Slot canyon in Arizona, beams of sunlight falling through a narrow opening onto sculpted red sandstone walls, swirling textures, dust in the air",
+  "size": "832×1280",
+  "seed": 10002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "landscape"
+ },
+ {
+  "image": "examples/97.webp",
+  "prompt": "A watercolor of a hummingbird and hibiscus flowers with vibrant splashes and paint drips on white paper",
+  "size": "1024×1024",
+  "seed": 97003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "watercolor"
+ },
+ {
+  "image": "examples/141.webp",
+  "prompt": "A biomechanical android woman with porcelain skin and exposed golden circuitry, intricate detail, studio portrait",
+  "size": "896×1152",
+  "seed": 141001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "scifi"
+ },
+ {
+  "image": "examples/157.webp",
+  "prompt": "A wooden sign above a small Japanese ramen shop that reads \"RAMEN\" with red lanterns hanging on both sides, night",
+  "size": "1152×896",
+  "seed": 157001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "typography"
+ },
+ {
+  "image": "examples/59.webp",
+  "prompt": "A school of silver fish forming a swirling bait ball in deep blue water, sunlight filtering from above, underwater photograph",
+  "size": "1024×1024",
+  "seed": 59001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "wildlife"
+ },
+ {
+  "image": "examples/128.webp",
+  "prompt": "A diorama inside a glass bottle containing a tiny lighthouse on a rocky island with crashing waves, detailed miniature",
+  "size": "896×1152",
+  "seed": 128002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "3d"
+ },
+ {
+  "image": "examples/20.webp",
+  "prompt": "Studio portrait of a Maasai elder wearing vibrant beaded jewelry, deep red cloth, dark backdrop, Rembrandt lighting, ultra detailed skin texture",
+  "size": "896×1152",
+  "seed": 20001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "portrait"
+ },
+ {
+  "image": "examples/71.webp",
+  "prompt": "A pair of retro white sneakers floating in the air against a vivid orange background, dynamic product shot, soft shadows",
+  "size": "1024×1024",
+  "seed": 71002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "product"
+ },
+ {
+  "image": "examples/116.webp",
+  "prompt": "A layered paper cut art diorama of a forest with deer and a full moon, soft shadows between layers, warm backlight",
+  "size": "1152×896",
+  "seed": 116001,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "craft"
+ },
+ {
+  "image": "examples/152.webp",
+  "prompt": "A neon sign that says \"Stay Weird\" in turquoise cursive letters on a dark wooden wall, glowing reflections",
+  "size": "1280×832",
+  "seed": 152002,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "typography"
+ },
+ {
+  "image": "examples/1048.webp",
+  "prompt": "A tattooed chef plating a dish in a busy restaurant kitchen, flames in the background, documentary photo",
+  "size": "1280×832",
+  "seed": 1048003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "portrait"
+ },
+ {
+  "image": "examples/1006.webp",
+  "prompt": "A cenote in the Yucatan jungle seen from inside, sunbeams falling through hanging roots into clear blue water",
+  "size": "896×1152",
+  "seed": 1006003,
+  "steps": 100,
+  "cfg": 3.0,
+  "category": "landscape"
+ }
+]

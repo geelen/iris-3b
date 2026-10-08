@@ -132,7 +132,10 @@ with `scripts/export_downstream.py`.
 ### Demo
 
 The Gradio app behind the [Hugging Face Space](https://huggingface.co/spaces/speridlabs/iris-3b)
-is in `demo/`; it runs on ZeroGPU there and on any local GPU:
+(text-to-image, depth and upscaling tabs) is in `demo/`; it runs on ZeroGPU
+there and on any local GPU. All three models together take ~45 GB of GPU memory;
+with `IRIS_OFFLOAD=1` they stay on the CPU and each request moves only the model it
+needs to the GPU (~20 GB peak), which is what the Space does:
 
 ```bash
 pip install -e ".[ui]"

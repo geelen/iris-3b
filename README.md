@@ -2,9 +2,6 @@
 
 **Pixel-space generation & general vision learner**
 
-Paper: [Going Beyond the Latent with Pixel-Space Diffusion Training, Conversion
-and Fine-Tuning](https://arxiv.org/abs/2610.09450) (arXiv:2610.09450)
-
 Generative priors are a promising foundation for downstream vision tasks. In
 this project we explore pixel-space generative models as an alternative to
 vision foundation models such as DINOv2.

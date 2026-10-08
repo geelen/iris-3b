@@ -233,13 +233,14 @@ HEAD = """
   <div class="sl-row">
     <h1>Iris-3B</h1>
     <div class="sl-links">
+      <a href="https://arxiv.org/abs/2610.09450" target="_blank">Paper</a>
       <a href="https://speridlabs.com/research/iris" target="_blank">Research post</a>
       <a href="https://github.com/speridlabs/iris-3b" target="_blank">Code</a>
       <button id="sl-theme" type="button" aria-label="Toggle light/dark"></button>
     </div>
   </div>
-  <p><strong>Pixel-space diffusion.</strong> No VAE: a 3B transformer generates every pixel directly.
-  The same model, fine-tuned, estimates <em>depth</em> and <em>restores images at 4×</em>.</p>
+  <p><strong>Pixel-space generation &amp; general vision learner.</strong> No VAE: a 3B transformer generates every pixel directly.
+  The same prior, fine-tuned, estimates <em>depth</em> and <em>restores images at 4×</em>.</p>
 </div>
 """
 

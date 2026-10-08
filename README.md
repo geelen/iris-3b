@@ -1,18 +1,24 @@
 # Iris-3B
 
-**Going Beyond the Latent with Pixel-Space Diffusion Training, Conversion and Fine-Tuning**
+**Pixel-space generation & general vision learner**
+
+Paper: [Going Beyond the Latent with Pixel-Space Diffusion Training, Conversion
+and Fine-Tuning](https://arxiv.org/abs/2610.09450) (arXiv:2610.09450)
 
 Generative priors are a promising foundation for downstream vision tasks. In
 this project we explore pixel-space generative models as an alternative to
 vision foundation models such as DINOv2.
 
-Iris-3B is a 3B-parameter text-to-image diffusion transformer that generates
-directly in pixel space: no VAE, every pixel is produced by the model. This
-repository contains the model, the training code used to train it, and
-inference.
+Iris-3B is a 3B-parameter diffusion transformer that generates directly in
+pixel space: no VAE, no latent space, every pixel is produced by the model, so
+nothing is lost to a lossy, texture-biased latent. It is not only an image
+generator: the same pixel-space prior, fine-tuned, estimates monocular depth and
+restores images at 4× — one backbone, three tasks. This repository contains the
+model, the training and fine-tuning code, and inference.
 
 <div align="center">
 
+[![arXiv](https://img.shields.io/badge/arXiv-2610.09450-b31b1b)](https://arxiv.org/abs/2610.09450)
 [![Project Page](https://img.shields.io/badge/Project_Page-1f6feb)](https://speridlabs.com/research/iris)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-yellow)](https://huggingface.co/speridlabs/iris-3b)
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow)](https://huggingface.co/spaces/speridlabs/iris-3b)
@@ -61,6 +67,38 @@ Samples from the final checkpoint at native aspect ratios of about one megapixel
 
 More samples: [project page](https://speridlabs.com/research/iris#gallery).
 
+## One prior, many tasks
+
+Iris-3B is a general vision learner, not only a text-to-image model: the same
+pixel-space backbone, fine-tuned with no architectural change, does dense
+vision tasks where detail matters. Both fine-tunes ship with the release (see
+[Depth and 4× restoration](#depth-and-4-restoration) for usage).
+
+**Monocular depth** — photo → relative depth, one forward pass:
+
+<table>
+<tr>
+<td width="25%" valign="top"><img src="assets/downstream/depth-1-photo.webp"><br><sub>Photo</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/depth-1-depth.webp"><br><sub>Iris-3B depth</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/depth-2-photo.webp"><br><sub>Photo</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/depth-2-depth.webp"><br><sub>Iris-3B depth</sub></td>
+</tr>
+</table>
+
+**4× restoration / super-resolution** — degraded input → restored image:
+
+<table>
+<tr>
+<td width="25%" valign="top"><img src="assets/downstream/restore-1-input.webp"><br><sub>Input</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/restore-1-iris.webp"><br><sub>Iris-3B, 4×</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/restore-2-input.webp"><br><sub>Input</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/restore-2-iris.webp"><br><sub>Iris-3B, 4×</sub></td>
+</tr>
+</table>
+
+Interactive depth point clouds and before/after sliders: [project page](https://speridlabs.com/research/iris#downstream)
+· [demo](https://huggingface.co/spaces/speridlabs/iris-3b).
+
 ## Model
 
 <div align="center"><img src="assets/arch.svg" width="720" alt="Iris-3B architecture"></div>
@@ -104,8 +142,9 @@ python scripts/export_checkpoint.py output/run/checkpoints/latest.pth exported/i
 ### Depth, image restoration and upscaling
 
 The release also ships Iris-3B fine-tuned for monocular depth estimation and
-for 4× image restoration / super-resolution, in the `depth/` and `upscaler/`
-folders of the same Hugging Face repo (~12 GB each). Both run the full model in
+for 4× image restoration / super-resolution — the general-vision-learner side of
+the model — in the `depth/` and `upscaler/` folders of the same Hugging Face
+repo (~12 GB each). Both run the full model in
 a single forward pass with the empty prompt, so no text encoder is loaded.
 
 ```bash
@@ -231,12 +270,13 @@ licenses:
 ## Citation
 
 ```bibtex
-@techreport{licai2026iris,
-  title       = {Iris-3B: Going Beyond the Latent with Pixel-Space
-                 Diffusion Training, Conversion and Fine-Tuning},
-  author      = {Li Cai, Hanqiu and Garabito, Chema},
-  institution = {Speridlabs},
-  year        = {2026}
+@article{licai2026iris,
+  title   = {Iris-3B: Going Beyond the Latent with Pixel-Space
+             Diffusion Training, Conversion and Fine-Tuning},
+  author  = {Li Cai, Hanqiu and Garabito, Chema},
+  journal = {arXiv preprint arXiv:2610.09450},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2610.09450}
 }
 ```
 

@@ -240,7 +240,7 @@ HEAD = """
     </div>
   </div>
   <p><strong>Pixel-space generation &amp; general vision learner.</strong> No VAE: a 3B transformer generates every pixel directly.
-  The same prior, fine-tuned, estimates <em>depth</em> and <em>restores images at 4×</em>.</p>
+  The same prior, fine-tuned, estimates <em>depth</em> and <em>restores and upscales images</em>.</p>
 </div>
 """
 

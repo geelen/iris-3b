@@ -10,7 +10,7 @@ Iris-3B is a 3B-parameter diffusion transformer that generates directly in
 pixel space: no VAE, no latent space, every pixel is produced by the model, so
 nothing is lost to a lossy, texture-biased latent. It is not only an image
 generator: the same pixel-space prior, fine-tuned, estimates monocular depth and
-restores images at 4× — one backbone, three tasks. This repository contains the
+restores and upscales images — one backbone, three tasks. This repository contains the
 model, the training and fine-tuning code, and inference.
 
 <div align="center">
@@ -69,7 +69,7 @@ More samples: [project page](https://speridlabs.com/research/iris#gallery).
 Iris-3B is a general vision learner, not only a text-to-image model: the same
 pixel-space backbone, fine-tuned with no architectural change, does dense
 vision tasks where detail matters. Both fine-tunes ship with the release (see
-[Depth and 4× restoration](#depth-and-4-restoration) for usage).
+[Depth, image restoration and upscaling](#depth-image-restoration-and-upscaling) for usage).
 
 **Monocular depth** — photo → relative depth, one forward pass:
 
@@ -82,14 +82,14 @@ vision tasks where detail matters. Both fine-tunes ship with the release (see
 </tr>
 </table>
 
-**4× restoration / super-resolution** — degraded input → restored image:
+**Image restoration and upscaling** — degraded input → restored image:
 
 <table>
 <tr>
 <td width="25%" valign="top"><img src="assets/downstream/restore-1-input.webp"><br><sub>Input</sub></td>
-<td width="25%" valign="top"><img src="assets/downstream/restore-1-iris.webp"><br><sub>Iris-3B, 4×</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/restore-1-iris.webp"><br><sub>Iris-3B</sub></td>
 <td width="25%" valign="top"><img src="assets/downstream/restore-2-input.webp"><br><sub>Input</sub></td>
-<td width="25%" valign="top"><img src="assets/downstream/restore-2-iris.webp"><br><sub>Iris-3B, 4×</sub></td>
+<td width="25%" valign="top"><img src="assets/downstream/restore-2-iris.webp"><br><sub>Iris-3B</sub></td>
 </tr>
 </table>
 
@@ -139,7 +139,7 @@ python scripts/export_checkpoint.py output/run/checkpoints/latest.pth exported/i
 ### Depth, image restoration and upscaling
 
 The release also ships Iris-3B fine-tuned for monocular depth estimation and
-for 4× image restoration / super-resolution — the general-vision-learner side of
+for image restoration and upscaling — the general-vision-learner side of
 the model — in the `depth/` and `upscaler/` folders of the same Hugging Face
 repo (~12 GB each). Both run the full model in
 a single forward pass with the empty prompt, so no text encoder is loaded.

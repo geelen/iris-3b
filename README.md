@@ -101,6 +101,34 @@ default, config reduced to model/text-encoder/flow settings):
 python scripts/export_checkpoint.py output/run/checkpoints/latest.pth exported/iris-3b
 ```
 
+### Depth, image restoration and upscaling
+
+The release also ships Iris-3B fine-tuned for monocular depth estimation and
+for 4× image restoration / super-resolution, in the `depth/` and `upscaler/`
+folders of the same Hugging Face repo (~12 GB each). Both run the full model in
+a single forward pass with the empty prompt, so no text encoder is loaded.
+
+```bash
+python scripts/depth.py photo.jpg --out depth_out      # <name>.npy + colorized <name>.png
+python scripts/upscale.py photo.jpg --out upscaled     # <name>_x4.png
+```
+
+- **Depth** returns relative log depth at the input resolution (−1 near, +1
+  far). It is affine-invariant, not metric: fit a scale and shift in log space
+  to compare with ground truth. Inputs above 1024 px on the long side are
+  downscaled for the model (`--max-side 0` keeps native resolution).
+- **Restoration** is a one-step restorer trained on 1024×1024 crops (4× of
+  256×256 inputs). The input is upsampled bicubically to 4×; outputs smaller
+  than 1024 on the short side are run as one tile, larger ones as overlapping
+  1024×1024 tiles (stride 512) blended with a Gaussian window, followed by a
+  wavelet colour fix against the bicubic upsample. By default inputs are first
+  downscaled to at most 512 px short side / 1024 px long side, which caps the
+  output at 2048×4096 (21 tiles); `--no-budget` keeps the input size.
+
+Python API: `iris3b.downstream.depth.DepthPredictor` and
+`iris3b.downstream.restoration.Restorer`. Fine-tuning checkpoints are converted
+with `scripts/export_downstream.py`.
+
 ### Demo
 
 The Gradio app behind the [Hugging Face Space](https://huggingface.co/spaces/speridlabs/iris-3b)

@@ -16,6 +16,7 @@ dependencies = [
     "wandb>=0.18",
     "pillow>=10.0",
     "numpy>=1.26",
+    "matplotlib>=3.8",
     "dion @ git+https://github.com/microsoft/dion.git@58d38adb5fcd403a116cb16157a5ca824f8538a5",
 ]
 

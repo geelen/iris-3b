@@ -50,15 +50,22 @@ def main():
         path = chunks / f"{index:05d}"
         if path.exists() and path.stat().st_size == end - start + 1:
             return
+        temporary = path.with_suffix(".partial")
         for attempt in range(20):
             try:
-                with requests.get(meta.location, headers={"Range": f"bytes={start}-{end}"}, stream=True, timeout=(20, 60)) as response:
+                offset = temporary.stat().st_size if temporary.exists() else 0
+                if offset > end - start + 1:
+                    raise RuntimeError("Partial range exceeds expected length")
+                if offset == end - start + 1:
+                    temporary.replace(path)
+                    return
+                resume = start + offset
+                with requests.get(meta.location, headers={"Range": f"bytes={resume}-{end}"}, stream=True, timeout=(20, 60)) as response:
                     response.raise_for_status()
-                    expected = f"bytes {start}-{end}/{size}"
+                    expected = f"bytes {resume}-{end}/{size}"
                     if response.status_code != 206 or response.headers.get("Content-Range") != expected:
                         raise RuntimeError(f"Incorrect range response: {response.status_code} {response.headers.get('Content-Range')}")
-                    temporary = path.with_suffix(".partial")
-                    with temporary.open("wb") as file:
+                    with temporary.open("ab") as file:
                         for data in response.iter_content(1024 * 1024):
                             file.write(data)
                     if temporary.stat().st_size != end - start + 1:

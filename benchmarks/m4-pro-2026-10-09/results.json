@@ -1,0 +1,61 @@
+{
+  "torch": "2.14.1",
+  "precision": "bfloat16 weights, float32 solver",
+  "cfg_scale": 3,
+  "seed": 42,
+  "runs": [
+    {
+      "prompt": "a red fox sleeping in fresh snow, golden hour, detailed wildlife photography",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "seconds": 47.372763708001,
+      "seconds_per_step": 2.3686381854000502,
+      "file": "01_512px_20steps.png",
+      "mps_driver_bytes": 8652537856
+    },
+    {
+      "prompt": "a red fox sleeping in fresh snow, golden hour, detailed wildlife photography",
+      "width": 1024,
+      "height": 1024,
+      "steps": 20,
+      "seconds": 166.70546574995387,
+      "seconds_per_step": 8.335273287497694,
+      "file": "02_1024px_20steps.png",
+      "mps_driver_bytes": 11873763328
+    },
+    {
+      "prompt": "a neon-lit Tokyo street in the rain at night, cinematic photography",
+      "width": 1024,
+      "height": 1024,
+      "steps": 20,
+      "seconds": 165.13829020806588,
+      "seconds_per_step": 8.256914510403295,
+      "file": "03_1024px_20steps.png",
+      "mps_driver_bytes": 11873763328
+    }
+  ],
+  "text_encoder_load_seconds": 16.190532583044842,
+  "encode_four_prompts_seconds": 2.9567503340076655,
+  "sampled_process_peaks": {
+    "rss_bytes": 11757682688,
+    "mps_driver_bytes": 11873763328,
+    "mps_allocated_bytes": 8131053568
+  },
+  "checkpoint_wait_seconds": 2.8499984182417393e-05,
+  "iris_load_seconds": 8.559697750024498,
+  "warmup_seconds": 3.7739217500202358,
+  "hardware": {
+    "chip": "Apple M4 Pro",
+    "gpu_cores": 20,
+    "unified_memory_gb": 48
+  },
+  "date": "2026-10-09",
+  "status": "in_progress",
+  "cpu_fallback": false,
+  "checkpoints_sha256": {
+    "iris": "a90e1f4c197bac8491f82078def68884b6a3527ea7fc97a693e3e367372aa80f",
+    "qwen_shard_1": "30a01a0556622645a3cce87b655bbbbbc1f170c196099f1b666c93202c3339a9",
+    "qwen_shard_2": "046296a2a387efb43b0c997d5833c789604d168834f6e0d3064bf7bb13d002a6"
+  }
+}

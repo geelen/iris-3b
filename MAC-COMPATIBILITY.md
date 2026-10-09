@@ -57,7 +57,7 @@ needed. This is a custom inference harness rather than the stock FP32 script.
 | [Fox](benchmarks/m4-pro-2026-10-09/01_512px_20steps.png) | 512×512 | 20 | 47.37 seconds |
 | [Fox](benchmarks/m4-pro-2026-10-09/02_1024px_20steps.png) | 1024×1024 | 20 | 166.71 seconds |
 | [Tokyo street](benchmarks/m4-pro-2026-10-09/03_1024px_20steps.png) | 1024×1024 | 20 | 165.14 seconds |
-| Fisherman portrait | 1024×1024 | 100 | Running |
+| [Fisherman portrait](benchmarks/m4-pro-2026-10-09/04_1024px_100steps.png) | 1024×1024 | 100 | 827.28 seconds |
 
 These are individual synchronized runs. Generation includes every model step
 but excludes downloads, model loading, initial prompt encoding, warmup, and
@@ -66,10 +66,19 @@ seconds, IRIS loading took 8.56 seconds, and a two-step 256px warmup took 3.77
 seconds. Per-step synchronization supports progress reporting and may add a
 small overhead.
 
+All four runs completed. Sampled peak Metal driver allocation was 11.06 GiB;
+sampled peak process RSS was 10.95 GiB. These measurements overlap on unified
+memory and are separate observations, not an additive total. Memory was
+sampled every 0.5 seconds. This run comfortably completed on the 48 GB machine.
+
 The 512px fox has prominent grid artifacts. The native 1024px fox and street
 images are visually much cleaner, although the street's signs contain invented
 text. These different resolutions do not establish a precision-related cause
 for the artifacts. There is no full-checkpoint FP32 or CUDA quality baseline.
+The 100-step portrait is coherent and has no obvious grid artifacts in visual
+inspection. It uses a different prompt from the 20-step images, so this is not
+a controlled comparison of step count and quality. At 1024px, 20 steps took
+about 2 minutes 46 seconds and 100 steps took 13 minutes 47 seconds.
 
 Reproduce after downloading the checkpoints:
 

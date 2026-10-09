@@ -33,6 +33,16 @@
       "seconds_per_step": 8.256914510403295,
       "file": "03_1024px_20steps.png",
       "mps_driver_bytes": 11873763328
+    },
+    {
+      "prompt": "studio portrait of an elderly fisherman, weathered face, soft window light, detailed photography",
+      "width": 1024,
+      "height": 1024,
+      "steps": 100,
+      "seconds": 827.281749250018,
+      "seconds_per_step": 8.272817492500181,
+      "file": "04_1024px_100steps.png",
+      "mps_driver_bytes": 11873763328
     }
   ],
   "text_encoder_load_seconds": 16.190532583044842,
@@ -51,11 +61,11 @@
     "unified_memory_gb": 48
   },
   "date": "2026-10-09",
-  "status": "in_progress",
   "cpu_fallback": false,
   "checkpoints_sha256": {
     "iris": "a90e1f4c197bac8491f82078def68884b6a3527ea7fc97a693e3e367372aa80f",
     "qwen_shard_1": "30a01a0556622645a3cce87b655bbbbbc1f170c196099f1b666c93202c3339a9",
     "qwen_shard_2": "046296a2a387efb43b0c997d5833c789604d168834f6e0d3064bf7bb13d002a6"
-  }
+  },
+  "status": "complete"
 }

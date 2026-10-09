@@ -89,6 +89,13 @@ def main():
     gc.collect()
     torch.mps.empty_cache()
     text = CachedText(cache)
+    persist()
+
+    waiting = time.perf_counter()
+    while not Path("output/iris-3b/model.safetensors").is_file():
+        print("Waiting for verified IRIS checkpoint", flush=True)
+        time.sleep(30)
+    report["checkpoint_wait_seconds"] = time.perf_counter() - waiting
 
     print("Loading IRIS in bfloat16", flush=True)
     start = time.perf_counter()

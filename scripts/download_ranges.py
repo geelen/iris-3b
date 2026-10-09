@@ -16,6 +16,9 @@ def main():
     parser.add_argument("repo")
     parser.add_argument("file")
     parser.add_argument("destination", type=Path)
+    parser.add_argument("--workers", type=int, default=16)
+    parser.add_argument("--block-mib", type=int, default=32)
+    parser.add_argument("--sparse-source", type=Path)
     args = parser.parse_args()
     meta = get_hf_file_metadata(hf_hub_url(args.repo, args.file))
     size = meta.size
@@ -24,8 +27,22 @@ def main():
         return
     chunks = args.destination.parent / ".ranges" / meta.etag
     chunks.mkdir(parents=True, exist_ok=True)
-    block = 32 * 1024 * 1024
+    block = args.block_mib * 1024 * 1024
     count = (size + block - 1) // block
+    if args.sparse_source:
+        recovered = 0
+        with args.sparse_source.open("rb") as source:
+            for index in range(count):
+                start = index * block
+                length = min(block, size - start)
+                source.seek(start)
+                data = source.read(length)
+                # A missing/incomplete sparse transfer chunk contains a zero tail.
+                # Reused chunks are provisional until the final SHA256 matches.
+                if len(data) == length and any(data[-4096:]) and any(data[:4096]):
+                    (chunks / f"{index:05d}").write_bytes(data)
+                    recovered += 1
+        print(f"Recovered {recovered}/{count} provisional ranges; full SHA256 check required", flush=True)
 
     def download(index):
         start = index * block
@@ -54,7 +71,7 @@ def main():
         raise RuntimeError(f"Range {index} exhausted retries")
 
     started = time.perf_counter()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = [pool.submit(download, index) for index in range(count)]
         for completed, future in enumerate(concurrent.futures.as_completed(futures), 1):
             future.result()

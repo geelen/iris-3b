@@ -40,10 +40,49 @@ are reusable immediately. An MLX implementation of FLUX provides useful
 reference code, but does not directly load IRIS checkpoints.
 
 The released image-generation weights are roughly 12 GB in float32; the Qwen
-checkpoint is an additional download. A full checkpoint run is still needed to
-measure memory, 1024px performance, and image quality. The stock inference
+checkpoint is an additional download. The stock inference
 script accepts `--device mps` but keeps IRIS weights in float32 and enables
 bfloat16 autocast only on CUDA.
+
+## Full-checkpoint benchmark
+
+The released weights run on this Mac through PyTorch MPS. The benchmark uses
+BF16 model parameters, FP32 solver state, CFG 3, seed 42, and one image per
+batch. Qwen encodes all prompts first and is then unloaded before IRIS loads.
+CPU operator fallback is explicitly disabled. No upstream model changes were
+needed. This is a custom inference harness rather than the stock FP32 script.
+
+| Image | Resolution | Steps | Generation time |
+| --- | --- | --- | --- |
+| [Fox](benchmarks/m4-pro-2026-10-09/01_512px_20steps.png) | 512×512 | 20 | 47.37 seconds |
+| [Fox](benchmarks/m4-pro-2026-10-09/02_1024px_20steps.png) | 1024×1024 | 20 | 166.71 seconds |
+| [Tokyo street](benchmarks/m4-pro-2026-10-09/03_1024px_20steps.png) | 1024×1024 | 20 | 165.14 seconds |
+| Fisherman portrait | 1024×1024 | 100 | Running |
+
+These are individual synchronized runs. Generation includes every model step
+but excludes downloads, model loading, initial prompt encoding, warmup, and
+PNG saving. Qwen loading took 16.19 seconds, four prompt encodings took 2.96
+seconds, IRIS loading took 8.56 seconds, and a two-step 256px warmup took 3.77
+seconds. Per-step synchronization supports progress reporting and may add a
+small overhead.
+
+The 512px fox has prominent grid artifacts. The native 1024px fox and street
+images are visually much cleaner, although the street's signs contain invented
+text. These different resolutions do not establish a precision-related cause
+for the artifacts. There is no full-checkpoint FP32 or CUDA quality baseline.
+
+Reproduce after downloading the checkpoints:
+
+```sh
+HF_HOME="$PWD/output/hf-cache" PYTORCH_ENABLE_MPS_FALLBACK=0 \
+  .venv/bin/python -u scripts/mac_benchmark.py
+```
+
+Run in a terminal with Apple GPU access. The harness expects IRIS files in
+`output/iris-3b` and Qwen in the specified Hugging Face cache. It writes images
+and raw measurements to `output/benchmark`. Archived images and portable
+measurements are in `benchmarks/m4-pro-2026-10-09`. All three downloaded weight
+files passed SHA256 validation against their Hugging Face metadata.
 
 Sources: [IRIS model card](https://huggingface.co/speridlabs/iris-3b),
 [Apple's FLUX MLX example](https://github.com/ml-explore/mlx-examples/tree/main/flux).
